@@ -18,13 +18,13 @@ import com.google.firebase.auth.AuthResult;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link signupFragment#newInstance} factory method to
+ * Use the {@link forgotpasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class signupFragment extends Fragment {
-    private EditText etusername , etpassword;
-    private Button btnsignup;
+public class forgotpasswordFragment extends Fragment {
     private firebaseservices fbs;
+    private EditText etemail;
+    private Button btnreset;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +35,7 @@ public class signupFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public signupFragment() {
+    public forgotpasswordFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +45,11 @@ public class signupFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment signupFragment.
+     * @return A new instance of fragment forgotpasswordFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static signupFragment newInstance(String param1, String param2) {
-        signupFragment fragment = new signupFragment();
+    public static forgotpasswordFragment newInstance(String param1, String param2) {
+        forgotpasswordFragment fragment = new forgotpasswordFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,21 +70,18 @@ public class signupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false);
+        return inflater.inflate(R.layout.fragment_forgotpassword, container, false);
     }
-
     @Override
     public void onStart() {
         super.onStart();
         fbs = firebaseservices.instance.getInstance();
-        etusername= getView().findViewById(R.id.etusernamesignup);
-        etpassword=getView().findViewById(R.id.etpasswordsignup);
-        btnsignup=getView().findViewById(R.id.btnsignupsignup);
-        btnsignup.setOnClickListener(new View.OnClickListener() {
+        etemail= getView().findViewById(R.id.etemailforgotpassword);
+        btnreset=getView().findViewById(R.id.btnresetforgotpassword);
+        btnreset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username=etusername.getText().toString();
-                String password=etpassword.getText().toString();
+                fbs.getAuth().sendPasswordResetEmail(etemail.getText().toString())
                 if(username.trim().isEmpty()&&password.trim().isEmpty())
                 {
                     Toast.makeText(getActivity(), "some fields are empty!", Toast.LENGTH_SHORT).show();
@@ -106,5 +103,4 @@ public class signupFragment extends Fragment {
         });
 
     }
-
 }
