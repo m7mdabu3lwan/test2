@@ -79,42 +79,34 @@ public class loginFragment extends Fragment {
     public void onStart() {
         super.onStart();
         fbs = firebaseservices.instance.getInstance();
-        etusername= getView().findViewById(R.id.etusernamelogin);
-        etpassword=getView().findViewById(R.id.etpasswordlogin);
-        btnlogin=getView().findViewById(R.id.btnloginlogin);
+        etusername = getView().findViewById(R.id.etusernamelogin);
+        etpassword = getView().findViewById(R.id.etpasswordlogin);
+        btnlogin = getView().findViewById(R.id.btnloginlogin);
         tvsignuplink = getView().findViewById(R.id.tvsignuplinklogin);
         tvsignuplink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
 
-            }
-        }) ;{
-            public void onClick(View View) {
-                gotosignupfragment();
-            }
-            }
-        };
-        public void onClick(View view) {
-                String username=etusername.getText().toString();
-                String password=etpassword.getText().toString();
-                if(username.trim().isEmpty()&&password.trim().isEmpty())
-                {
+            public void onClick(View view) {
+                String username = etusername.getText().toString();
+                String password = etpassword.getText().toString();
+                if (username.trim().isEmpty() && password.trim().isEmpty()) {
                     Toast.makeText(getActivity(), "some fields are empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fbs.getAuth().signInWithEmailAndPassword(username,password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                fbs.getAuth().signInWithEmailAndPassword(username, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "you have successfully logged in", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getActivity(), "field to login", Toast.LENGTH_SHORT).show();
                         }
                     }
-                })
+                });
             }
-        }
+        });
+    }
+
 
     private void gotosignupfragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
