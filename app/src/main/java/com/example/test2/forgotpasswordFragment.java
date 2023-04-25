@@ -72,11 +72,15 @@ public class forgotpasswordFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_forgotpassword, container, false);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     @Override
     public void onStart() {
         super.onStart();
         fbs = firebaseservices.instance.getInstance();
+<<<<<<< HEAD
         etemail = getView().findViewById(R.id.etemailforgotpassword);
         btnreset = getView().findViewById(R.id.btnresetforgotpassword);
         btnreset.setOnClickListener(new View.OnClickListener() {
@@ -98,5 +102,33 @@ public class forgotpasswordFragment extends Fragment {
     }
 
     ;});
+=======
+        etemail= getView().findViewById(R.id.etemailforgotpassword);
+        btnreset=getView().findViewById(R.id.btnresetforgotpassword);
+        btnreset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fbs.getAuth().sendPasswordResetEmail(etemail.getText().toString())
+                if(username.trim().isEmpty()&&password.trim().isEmpty())
+                {
+                    Toast.makeText(getActivity(), "some fields are empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                fbs.getAuth().createUserWithEmailAndPassword(username,password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "you have successfully signed up", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getActivity(), "field to signup", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+        });
+
+>>>>>>> origin/master
     }
 }
