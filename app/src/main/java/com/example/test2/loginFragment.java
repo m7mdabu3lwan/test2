@@ -97,6 +97,7 @@ public class loginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            // TODO: goto user list
                             Toast.makeText(getActivity(), "you have successfully logged in", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getActivity(), "field to login", Toast.LENGTH_SHORT).show();
