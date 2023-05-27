@@ -1,6 +1,7 @@
 package com.example.test2;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,11 +24,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(Context).inflate(R.layout.item,parent,false);
+
+        return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+        User user=userArrayList.get(position);
+        holder.firstName.setText(user.firstname);
+        holder.lastName.setText(user.lastname);
 
     }
 
@@ -36,11 +42,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return userArrayList.size();
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView firstName,lastName,age;
+        TextView firstName,lastName;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            //TODO: firstName=itemView.findViewById(R.id.)
+            firstName=itemView.findViewById(R.id.tvfirstname);
+            lastName=itemView.findViewById(R.id.tvlastname);
         }
     }
 }

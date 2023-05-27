@@ -24,7 +24,7 @@ import com.google.firebase.auth.AuthResult;
 public class signupFragment extends Fragment {
     private EditText etusername , etpassword;
     private Button btnsignup;
-    private firebaseservices fbs;
+    private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,7 +76,7 @@ public class signupFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fbs = firebaseservices.instance.getInstance();
+        fbs = FirebaseServices.getInstance();
         etusername= getView().findViewById(R.id.etusernamesignup);
         etpassword=getView().findViewById(R.id.etpasswordsignup);
         btnsignup=getView().findViewById(R.id.btnsignupsignup);
@@ -97,6 +97,7 @@ public class signupFragment extends Fragment {
                             Toast.makeText(getActivity(), "you have successfully signed up", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            task.getException().getMessage();
                             Toast.makeText(getActivity(), "field to signup", Toast.LENGTH_SHORT).show();
                         }
                     }

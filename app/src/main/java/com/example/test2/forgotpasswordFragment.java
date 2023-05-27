@@ -22,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
  * create an instance of this fragment.
  */
 public class forgotpasswordFragment extends Fragment {
-    private firebaseservices fbs;
+    private FirebaseServices fbs;
     private EditText etemail;
     private Button btnreset;
 
@@ -76,7 +76,7 @@ public class forgotpasswordFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fbs = firebaseservices.instance.getInstance();
+        fbs = FirebaseServices.getInstance();
         etemail = getView().findViewById(R.id.etemailforgotpassword);
         btnreset = getView().findViewById(R.id.btnresetforgotpassword);
         btnreset.setOnClickListener(new View.OnClickListener() {

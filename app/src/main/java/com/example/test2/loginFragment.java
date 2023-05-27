@@ -27,7 +27,7 @@ public class loginFragment extends Fragment {
     private EditText etusername , etpassword;
     private TextView tvsignuplink;
     private Button btnlogin;
-    private firebaseservices fbs;
+    private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,12 +78,18 @@ public class loginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fbs = firebaseservices.instance.getInstance();
+        fbs = FirebaseServices.getInstance();
         etusername = getView().findViewById(R.id.etusernamelogin);
         etpassword = getView().findViewById(R.id.etpasswordlogin);
         btnlogin = getView().findViewById(R.id.btnloginlogin);
         tvsignuplink = getView().findViewById(R.id.tvsignuplinklogin);
         tvsignuplink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotosignupfragment();
+            }
+        });
+        btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View view) {

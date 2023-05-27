@@ -1,12 +1,26 @@
 package com.example.test2;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,12 +29,14 @@ import android.view.ViewGroup;
  */
 public class UserListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    RecyclerView recyclerView;
+    ArrayList<User> userArrayList;
+    MyAdapter myadapter;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +44,6 @@ public class UserListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static UserListFragment newInstance(String param1, String param2) {
         UserListFragment fragment = new UserListFragment();
         Bundle args = new Bundle();
@@ -49,10 +56,48 @@ public class UserListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data...");
+        progressDialog.show();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            recyclerView =getActivity().findViewById(R.id.recylerview);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            db=FirebaseFirestore.getInstance();
+            userArrayList=new ArrayList<User>();
+            myadapter = new MyAdapter(getActivity(),userArrayList);
+            recyclerView.setAdapter(myadapter);
+
+            EventChangeListener();
+
         }
+    }
+
+    private void EventChangeListener() {
+        db.collection("users").orderBy("firstname:", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error !=null){
+                    if (progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    Log.e("firestore error",error.getMessage());
+                    return;
+                }
+                for(DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType()==DocumentChange.Type.ADDED){
+                        userArrayList.add(dc.getDocument().toObject(User.class));
+
+                    }
+                    myadapter.notifyDataSetChanged();
+                    if (progressDialog.isShowing())
+                        progressDialog.dismiss();
+                }
+            }
+        });
     }
 
     @Override
