@@ -34,7 +34,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         User user=userArrayList.get(position);
         holder.firstName.setText(user.firstname);
         holder.lastName.setText(user.lastname);
-
     }
 
     @Override

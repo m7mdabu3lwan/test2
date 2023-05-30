@@ -47,7 +47,6 @@ public class forgotpasswordFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment forgotpasswordFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static forgotpasswordFragment newInstance(String param1, String param2) {
         forgotpasswordFragment fragment = new forgotpasswordFragment();
         Bundle args = new Bundle();

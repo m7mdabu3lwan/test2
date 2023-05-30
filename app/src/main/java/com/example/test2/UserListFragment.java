@@ -13,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -56,48 +58,50 @@ public class UserListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
-        progressDialog.show();
+        progressDialog.show(); */
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            recyclerView =getActivity().findViewById(R.id.recylerview);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            db=FirebaseFirestore.getInstance();
-            userArrayList=new ArrayList<User>();
-            myadapter = new MyAdapter(getActivity(),userArrayList);
-            recyclerView.setAdapter(myadapter);
-
-            EventChangeListener();
-
         }
     }
 
-    private void EventChangeListener() {
-        db.collection("users").orderBy("firstname:", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error !=null){
-                    if (progressDialog.isShowing())
-                        progressDialog.dismiss();
-                    Log.e("firestore error",error.getMessage());
-                    return;
-                }
-                for(DocumentChange dc :value.getDocumentChanges()){
-                    if(dc.getType()==DocumentChange.Type.ADDED){
-                        userArrayList.add(dc.getDocument().toObject(User.class));
+    @Override
+    public void onStart() {
+        super.onStart();
+        recyclerView =getActivity().findViewById(R.id.recylerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        db=FirebaseFirestore.getInstance();
+        userArrayList=new ArrayList<User>();
+        myadapter = new MyAdapter(getActivity(),userArrayList);
+        recyclerView.setAdapter(myadapter);
+        EventChangeListener();
 
+    }
+
+    private void EventChangeListener() {
+        db.collection("users")
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            try {
+                                User profile = document.toObject(User.class);
+                                userArrayList.add(profile);
+                            } catch (Exception ex) {
+                                Log.e("GetData: ", ex.getMessage());
+                            }
+                        }
+
+                        // Create adapter and set it to RecyclerView
+                        myadapter = new MyAdapter(getActivity(), userArrayList);
+                        recyclerView.setAdapter(myadapter);
                     }
-                    myadapter.notifyDataSetChanged();
-                    if (progressDialog.isShowing())
-                        progressDialog.dismiss();
-                }
-            }
-        });
+                });
     }
 
     @Override

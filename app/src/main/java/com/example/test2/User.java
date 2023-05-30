@@ -1,14 +1,31 @@
 package com.example.test2;
 
 public class User {
-    String firstname , lastname;
-    long age;
+    String firstname , lastname,email;
+    String w;
     public User(){}
 
-    public User(String firstname, String lastname, long age) {
+    public User(String firstname, String lastname, String w,String email) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.age = age;
+        this.w = w;
+        this.email=email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getT() {
+        return w;
+    }
+
+    public void setT(String t) {
+        this.w= t;
     }
 
     public String getFirstname() {
@@ -27,11 +44,13 @@ public class User {
         this.lastname = lastname;
     }
 
-    public long getAge() {
-        return age;
-    }
-
-    public void setAge(long age) {
-        this.age = age;
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", w=" + w +
+                '}';
     }
 }

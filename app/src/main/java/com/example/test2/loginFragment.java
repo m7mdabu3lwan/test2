@@ -104,8 +104,12 @@ public class loginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // TODO: goto user list
-                            Toast.makeText(getActivity(), "you have successfully logged in", Toast.LENGTH_SHORT).show();
+                            FragmentTransaction ft =getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.framelayoutmain,new UserAdd());
+                            ft.commit();
+
                         } else {
+
                             Toast.makeText(getActivity(), "field to login", Toast.LENGTH_SHORT).show();
                         }
                     }
