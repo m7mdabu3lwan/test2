@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".nutrition">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/spbulkorcut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="108dp" />
+
+        <TextView
+            android:id="@+id/tvprotein"
+            android:layout_width="213dp"
+            android:layout_height="38dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="318dp" />
+
+        <TextView
+            android:id="@+id/tvcarbohydrate"
+            android:layout_width="213dp"
+            android:layout_height="38dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="446dp" />
+
+        <TextView
+            android:id="@+id/tvcalories"
+            android:layout_width="213dp"
+            android:layout_height="38dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="185dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -84,7 +84,7 @@ public class UserListFragment extends Fragment {
     }
 
     private void EventChangeListener() {
-        db.collection("users")
+        db.collection("Users")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
