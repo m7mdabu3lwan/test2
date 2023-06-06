@@ -7,9 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +27,12 @@ public class nutrition extends Fragment {
 
     TextView protein,carbohydrate,calories;
     Spinner bulkorcut;
+    FirebaseServices fbs;
+    User user;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -38,15 +43,43 @@ public class nutrition extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //TODO:
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("Bulk");
-        spinnerArray.add("Cut");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        fbs=FirebaseServices.getInstance();
+        fbs.getFire().collection("Users").whereEqualTo("user", fbs.getAuth().getCurrentUser().getEmail())
+                .get()
+                .addOnSuccessListener((QuerySnapshot querySnapshot) -> {
+                    if (querySnapshot.isEmpty()) {
+                        System.out.println("No users found.");
+                        return;
+                    }
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) getView().findViewById(R.id.spbulkorcut);
-        sItems.setAdapter(adapter);
+                    System.out.println("Number of users: " + querySnapshot.size());
+
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        String userId = doc.getId();
+                        user = doc.toObject(User.class);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    System.out.println("Error retrieving users: " + e.getMessage());
+                });
+        calories = getView().findViewById(R.id.tvcalories);
+        protein = getView().findViewById(R.id.tvprotein);
+        carbohydrate = getView().findViewById(R.id.tvcarbohydrate);
+        bulkorcut = getView().findViewById(R.id.spbulkorcut);
+        bulkorcut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(bulkorcut.getSelectedItem().toString().equals("cut")){
+                    calories.setText(""+2*18*Double.parseDouble(user.getW()));
+                    protein.setText(""+2*Double.parseDouble(user.getW()));
+                    carbohydrate.setText(""+3*Double.parseDouble(user.getW()));
+                }else {
+                    calories.setText(""+40*Double.parseDouble(user.getW()));
+                    protein.setText(""+2*Double.parseDouble(user.getW()));
+                    carbohydrate.setText(""+5*Double.parseDouble(user.getW()));
+                }
+            }
+        });
     }
 
     /**

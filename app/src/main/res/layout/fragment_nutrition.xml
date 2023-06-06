@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,34 +12,48 @@
 
         <Spinner
             android:id="@+id/spbulkorcut"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="108dp" />
+            android:layout_marginTop="108dp"
+            android:layout_marginBottom="53dp"
+            android:entries="@array/spinnerItems"
+            app:layout_constraintBottom_toTopOf="@+id/tvcalories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvprotein"
             android:layout_width="213dp"
-            android:layout_height="38dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="90dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="318dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvcarbohydrate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvcalories" />
 
         <TextView
             android:id="@+id/tvcarbohydrate"
             android:layout_width="213dp"
-            android:layout_height="38dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="247dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="446dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvprotein" />
 
         <TextView
             android:id="@+id/tvcalories"
             android:layout_width="213dp"
-            android:layout_height="38dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="95dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="185dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvprotein"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spbulkorcut" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

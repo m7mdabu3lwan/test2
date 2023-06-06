@@ -22,7 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
  * create an instance of this fragment.
  */
 public class UserAdd extends Fragment {
-    EditText firstname , lastname , weight;
+    EditText firstname, lastname, weight;
     Button enter;
     FirebaseServices fbs;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,11 +74,11 @@ public class UserAdd extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        firstname=getView().findViewById(R.id.etfirstname);
-        lastname=getView().findViewById(R.id.etlastname);
-        weight=getView().findViewById(R.id.etweight);
-        enter=getView().findViewById(R.id.btnenter);
-        fbs=FirebaseServices.getInstance();
+        firstname = getView().findViewById(R.id.etfirstname);
+        lastname = getView().findViewById(R.id.etlastname);
+        weight = getView().findViewById(R.id.etweight);
+        enter = getView().findViewById(R.id.btnenter);
+        fbs = FirebaseServices.getInstance();
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,28 +87,35 @@ public class UserAdd extends Fragment {
         });
 
     }
+
     private void addToFirestore() {
-            String fname, lname;
-            String weight1;
-            String email;
-            fname = firstname.getText().toString();
-            lname = lastname.getText().toString();
-            weight1 = weight.getText().toString();
-            email = fbs.getAuth().getCurrentUser().getEmail();
-            User user = new User(fname, lname, weight1, email);
+        String fname, lname;
+        String weight1;
+        String email;
+        fname = firstname.getText().toString();
+        lname = lastname.getText().toString();
+        weight1 = weight.getText().toString();
+        email = fbs.getAuth().getCurrentUser().getEmail();
+        User user = new User(fname, lname, weight1, email);
 
-            fbs.getFire().collection("Users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    FragmentTransaction ft =getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.framelayoutmain,new UserListFragment());
-                    ft.commit();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
+        fbs.getFire().collection("Users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.framelayoutmain, new nutrition());
+                ft.commit();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
-                }
-            });
-        }
+            }
+        });
+    }
+
+    private void gotonutritionfragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.framelayoutmain, new nutrition());
+        ft.commit();
+    }
 }

@@ -44,6 +44,14 @@ public class User {
         this.lastname = lastname;
     }
 
+    public String getW() {
+        return w;
+    }
+
+    public void setW(String w) {
+        this.w = w;
+    }
+
     @Override
     public String toString() {
         return "User{" +
