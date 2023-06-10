@@ -1,4 +1,4 @@
-package com.example.test2;
+package com.example.test2.Fragments;
 
 import android.os.Bundle;
 
@@ -12,16 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.test2.Data.FirebaseServices;
+import com.example.test2.R;
+import com.example.test2.Activities.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserAdd#newInstance} factory method to
+ * Use the {@link UserAddFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserAdd extends Fragment {
+public class UserAddFragment extends Fragment {
     EditText firstname, lastname, weight;
     Button enter;
     FirebaseServices fbs;
@@ -33,7 +36,7 @@ public class UserAdd extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserAdd() {
+    public UserAddFragment() {
         // Required empty public constructor
     }
 
@@ -46,8 +49,8 @@ public class UserAdd extends Fragment {
      * @return A new instance of fragment UserAdd.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserAdd newInstance(String param1, String param2) {
-        UserAdd fragment = new UserAdd();
+    public static UserAddFragment newInstance(String param1, String param2) {
+        UserAddFragment fragment = new UserAddFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -102,20 +105,19 @@ public class UserAdd extends Fragment {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.framelayoutmain, new nutrition());
+                ft.replace(R.id.framelayoutmain, new NutritionFragment());
                 ft.commit();
             }
-        }).addOnFailureListener(new OnFailureListener() {
+        }).addOnFailureListener(new OnFailureListener(){
             @Override
             public void onFailure(@NonNull Exception e) {
-
             }
         });
     }
 
     private void gotonutritionfragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain, new nutrition());
+        ft.replace(R.id.framelayoutmain, new NutritionFragment());
         ft.commit();
     }
 }

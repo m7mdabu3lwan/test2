@@ -1,17 +1,17 @@
-package com.example.test2;
+package com.example.test2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.test2.Data.FirebaseServices;
+import com.example.test2.Fragments.UserAddFragment;
+import com.example.test2.Fragments.loginFragment;
+import com.example.test2.Fragments.NutritionFragment;
+import com.example.test2.R;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                         if (querySnapshot.isEmpty()) {
                             System.out.println("No users found.");
                             FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.framelayoutmain,new UserAdd());
+                            ft.replace(R.id.framelayoutmain,new UserAddFragment());
                             ft.commit();
                             return;
                         }
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void Check() {
         FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain,new nutrition());
+        ft.replace(R.id.framelayoutmain,new NutritionFragment());
         ft.commit();
     }
 

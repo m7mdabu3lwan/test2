@@ -1,4 +1,4 @@
-package com.example.test2;
+package com.example.test2.Fragments;
 
 import android.os.Bundle;
 
@@ -8,22 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.test2.Data.FirebaseServices;
+import com.example.test2.R;
+import com.example.test2.Activities.User;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link nutrition#newInstance} factory method to
+ * Use the {@link NutritionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class nutrition extends Fragment {
+public class NutritionFragment extends Fragment {
 
     TextView protein,carbohydrate,calories;
     Spinner bulkorcut;
@@ -36,7 +35,7 @@ public class nutrition extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public nutrition() {
+    public NutritionFragment() {
         // Required empty public constructor
     }
 
@@ -91,8 +90,8 @@ public class nutrition extends Fragment {
      * @return A new instance of fragment nutrition.
      */
     // TODO: Rename and change types and number of parameters
-    public static nutrition newInstance(String param1, String param2) {
-        nutrition fragment = new nutrition();
+    public static NutritionFragment newInstance(String param1, String param2) {
+        NutritionFragment fragment = new NutritionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

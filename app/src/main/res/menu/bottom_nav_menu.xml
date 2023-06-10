@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Nutrition"
+        android:icon="@drawable/wellness"
+        android:id="@+id/nutrition"/>
+    <item android:title="Calc"
+        android:icon="@drawable/baseline_calculate_24"
+        android:id="@+id/calc"/>
+    <item android:title="User add"
+        android:icon="@drawable/baseline_person_add_24"
+        android:id="@+id/useradd"/>
+    <item android:title="User list"
+        android:icon="@drawable/baseline_view_list_24"
+        android:id="@+id/userlist"/>
+</menu>

@@ -1,4 +1,4 @@
-package com.example.test2;
+package com.example.test2.Activities;
 
 public class User {
     String firstname , lastname,email;
