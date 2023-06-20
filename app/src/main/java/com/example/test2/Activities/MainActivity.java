@@ -1,15 +1,21 @@
 package com.example.test2.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.test2.Data.FirebaseServices;
-import com.example.test2.Fragments.UserAddFragment;
-import com.example.test2.Fragments.loginFragment;
 import com.example.test2.Fragments.NutritionFragment;
+import com.example.test2.Fragments.UserAddFragment;
+import com.example.test2.Fragments.UserListFragment;
+import com.example.test2.Fragments.loginFragment;
 import com.example.test2.R;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -19,42 +25,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseServices fbs =FirebaseServices.getInstance();
-        if(fbs.getAuth().getCurrentUser()!=null){
-            fbs.getFire().collection("Users").whereEqualTo("user", fbs.getAuth().getCurrentUser().getEmail())
-                    .get()
-                    .addOnSuccessListener((QuerySnapshot querySnapshot) -> {
-                        if (querySnapshot.isEmpty()) {
-                            System.out.println("No users found.");
-                            FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.framelayoutmain,new UserAddFragment());
-                            ft.commit();
-                            return;
-                        }
-                        System.out.println("Number of users: " + querySnapshot.size());
-                        for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
-                            String userId = doc.getId();
-                        }
-                        Check();
-                    })
-                    .addOnFailureListener(e -> {
-                        System.out.println("Error retrieving users: " + e.getMessage());
-                    });
-        }else {
-            gotologinfragment();
-        }
+        gotologinfragment();
     }
 
-    private void Check() {
-        FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain,new NutritionFragment());
-        ft.commit();
-    }
+
 
     private void gotologinfragment()
     {
-        FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain,new loginFragment());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, new loginFragment());
         ft.commit();
     }
 }

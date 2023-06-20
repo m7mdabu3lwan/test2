@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.test2.Data.FirebaseServices;
 import com.example.test2.R;
@@ -104,8 +105,9 @@ public class UserAddFragment extends Fragment {
         fbs.getFire().collection("Users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getActivity(), "working", Toast.LENGTH_SHORT).show();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.framelayoutmain, new NutritionFragment());
+                ft.replace(R.id.Zain, new NutritionFragment());
                 ft.commit();
             }
         }).addOnFailureListener(new OnFailureListener(){
@@ -116,6 +118,7 @@ public class UserAddFragment extends Fragment {
     }
 
     private void gotonutritionfragment() {
+        Toast.makeText(getActivity(), "lol", Toast.LENGTH_SHORT).show();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.framelayoutmain, new NutritionFragment());
         ft.commit();

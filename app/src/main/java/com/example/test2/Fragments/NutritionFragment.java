@@ -2,9 +2,11 @@ package com.example.test2.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +16,9 @@ import android.widget.TextView;
 import com.example.test2.Data.FirebaseServices;
 import com.example.test2.R;
 import com.example.test2.Activities.User;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -28,6 +33,8 @@ public class NutritionFragment extends Fragment {
     Spinner bulkorcut;
     FirebaseServices fbs;
     User user;
+
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -42,25 +49,11 @@ public class NutritionFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fbs=FirebaseServices.getInstance();
-        fbs.getFire().collection("Users").whereEqualTo("user", fbs.getAuth().getCurrentUser().getEmail())
-                .get()
-                .addOnSuccessListener((QuerySnapshot querySnapshot) -> {
-                    if (querySnapshot.isEmpty()) {
-                        System.out.println("No users found.");
-                        return;
-                    }
+        connectComponents();
+    }
 
-                    System.out.println("Number of users: " + querySnapshot.size());
+    private void connectComponents() {
 
-                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
-                        String userId = doc.getId();
-                        user = doc.toObject(User.class);
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    System.out.println("Error retrieving users: " + e.getMessage());
-                });
         calories = getView().findViewById(R.id.tvcalories);
         protein = getView().findViewById(R.id.tvprotein);
         carbohydrate = getView().findViewById(R.id.tvcarbohydrate);

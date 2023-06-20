@@ -1,5 +1,6 @@
 package com.example.test2.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,17 +15,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test2.Activities.StartActivity;
 import com.example.test2.Data.FirebaseServices;
 import com.example.test2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link loginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class loginFragment extends Fragment {
     private EditText etusername , etpassword;
     private TextView tvsignuplink;
@@ -106,9 +104,8 @@ public class loginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // TODO: goto user list
-                            FragmentTransaction ft =getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.framelayoutmain,new UserAddFragment());
-                            ft.commit();
+                            Intent intent = new Intent(getActivity(), StartActivity.class);
+                            startActivity(intent);
 
                         } else {
 
@@ -123,7 +120,7 @@ public class loginFragment extends Fragment {
 
     private void gotosignupfragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain, new signupFragment());
+        ft.replace(R.id.container, new signupFragment());
         ft.commit();
     }
 }
