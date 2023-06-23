@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,12 @@ import com.example.test2.Activities.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,8 @@ public class UserAddFragment extends Fragment {
     EditText firstname, lastname, weight;
     Button enter;
     FirebaseServices fbs;
+    String userid;
+    Boolean isuser=false;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -89,7 +98,25 @@ public class UserAddFragment extends Fragment {
                 addToFirestore();
             }
         });
+        fbs.getFire().collection("Users").whereEqualTo("email", fbs.getAuth().getCurrentUser().getEmail())
+                .get()
+                .addOnSuccessListener((QuerySnapshot querySnapshot) -> {
+                    if (querySnapshot.isEmpty()) {
+                        System.out.println("No users found.");
+                        isuser=true;
+                        return;
+                    }
 
+                    System.out.println("Number of users: " + querySnapshot.size());
+
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        userid = doc.getId();
+
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    System.out.println("Error retrieving users: " + e.getMessage());
+                });
     }
 
     private void addToFirestore() {
@@ -101,26 +128,46 @@ public class UserAddFragment extends Fragment {
         weight1 = weight.getText().toString();
         email = fbs.getAuth().getCurrentUser().getEmail();
         User user = new User(fname, lname, weight1, email);
+        if (isuser) {
+            fbs.getFire().collection("Users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText(getActivity(), "working", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.Zain, new NutritionFragment());
+                    ft.commit();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
 
-        fbs.getFire().collection("Users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getActivity(), "working", Toast.LENGTH_SHORT).show();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.Zain, new NutritionFragment());
-                ft.commit();
-            }
-        }).addOnFailureListener(new OnFailureListener(){
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
+        }else{
+            DocumentReference doc = fbs.getFire().collection("Users").document(userid);
+
+                doc.set(user)
+                        .addOnSuccessListener(aVoid -> {
+                            try {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.Zain, new NutritionFragment());
+                            ft.commit();
+                            System.out.println("ArrayList updated successfully.");
+                            }catch (Exception e){
+                                Log.e(getTag(),e.getMessage());
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            System.out.println("Error updating ArrayList: " + e.getMessage());
+                        });
+
+        }
     }
 
     private void gotonutritionfragment() {
         Toast.makeText(getActivity(), "lol", Toast.LENGTH_SHORT).show();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.framelayoutmain, new NutritionFragment());
+        ft.replace(R.id.Zain, new NutritionFragment());
         ft.commit();
     }
 }

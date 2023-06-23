@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.helper.widget.Layer xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Zain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.NutritionFragment">
@@ -10,28 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/spbulkorcut"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
-            android:layout_marginBottom="53dp"
-            android:entries="@array/spinnerItems"
-            app:layout_constraintBottom_toTopOf="@+id/tvcalories"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
-            android:id="@+id/tvprotein"
+            android:id="@+id/tvcalories"
             android:layout_width="213dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="95dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/tvcarbohydrate"
+            app:layout_constraintBottom_toTopOf="@+id/tvprotein"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvcalories" />
+            app:layout_constraintTop_toBottomOf="@+id/spbulkorcut" />
 
         <TextView
             android:id="@+id/tvcarbohydrate"
@@ -45,16 +34,41 @@
             app:layout_constraintTop_toBottomOf="@+id/tvprotein" />
 
         <TextView
-            android:id="@+id/tvcalories"
+            android:id="@+id/tvprotein"
             android:layout_width="213dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="95dp"
+            android:layout_marginBottom="90dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/tvprotein"
+            app:layout_constraintBottom_toTopOf="@+id/tvcarbohydrate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvcalories" />
+
+        <Spinner
+            android:id="@+id/spbulkorcut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:layout_marginBottom="373dp"
+            android:entries="@array/spinnerItems"
+            app:layout_constraintBottom_toTopOf="@+id/imgv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="26dp"
+            android:src="@drawable/cut"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spbulkorcut" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.helper.widget.Layer>
+</FrameLayout>
+

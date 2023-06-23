@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.test2.Data.FirebaseServices;
+import com.example.test2.Fragments.HomeFragment;
 import com.example.test2.Fragments.NutritionFragment;
 import com.example.test2.Fragments.UserAddFragment;
 import com.example.test2.Fragments.UserListFragment;
@@ -20,12 +21,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
-
+    FirebaseServices fbs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gotologinfragment();
+        fbs=FirebaseServices.getInstance();
+        if (fbs.getAuth().getCurrentUser()!=null){
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.container, new HomeFragment());
+            ft.commit();
+        }
+        else gotologinfragment();
     }
 
 

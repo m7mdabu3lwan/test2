@@ -20,13 +20,6 @@ public class User {
         this.email = email;
     }
 
-    public String getT() {
-        return w;
-    }
-
-    public void setT(String t) {
-        this.w= t;
-    }
 
     public String getFirstname() {
         return firstname;

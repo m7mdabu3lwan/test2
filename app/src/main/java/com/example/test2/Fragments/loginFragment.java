@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test2.Activities.StartActivity;
 import com.example.test2.Data.FirebaseServices;
 import com.example.test2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -104,8 +103,9 @@ public class loginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // TODO: goto user list
-                            Intent intent = new Intent(getActivity(), StartActivity.class);
-                            startActivity(intent);
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.container, new HomeFragment());
+                            ft.commit();
 
                         } else {
 

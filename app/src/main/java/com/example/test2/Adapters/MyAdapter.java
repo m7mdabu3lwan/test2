@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         User user=userArrayList.get(position);
         holder.firstName.setText(user.getFirstname());
         holder.lastName.setText(user.getLastname());
+        holder.weight.setText(user.getW());
     }
 
     @Override
@@ -43,12 +44,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return userArrayList.size();
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView firstName,lastName;
+        TextView firstName,lastName,weight;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             firstName=itemView.findViewById(R.id.tvfirstname);
             lastName=itemView.findViewById(R.id.tvlastname);
+            weight=itemView.findViewById(R.id.tvweight);
         }
     }
 }
