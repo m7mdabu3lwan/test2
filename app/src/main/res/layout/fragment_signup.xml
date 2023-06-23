@@ -4,11 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/firstback"
     tools:context=".Fragments.signupFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imgback2"
+            android:layout_width="67dp"
+            android:layout_height="46dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintBottom_toTopOf="@+id/etusernamesignup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.108" />
 
         <Button
             android:id="@+id/btnsignupsignup"
@@ -16,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:text="signup"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etpasswordsignup" />
@@ -29,6 +44,7 @@
             android:hint="password:"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/etusernamesignup"
             app:layout_constraintTop_toBottomOf="@+id/etusernamesignup" />
 
@@ -41,6 +57,7 @@
             android:hint="Username:"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

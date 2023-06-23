@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.test2.Data.FirebaseServices;
@@ -26,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 public class signupFragment extends Fragment {
     private EditText etusername , etpassword;
     private Button btnsignup;
+    private ImageView imgb;
     private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -81,6 +84,11 @@ public class signupFragment extends Fragment {
         fbs = FirebaseServices.getInstance();
         etusername= getView().findViewById(R.id.etusernamesignup);
         etpassword=getView().findViewById(R.id.etpasswordsignup);
+        imgb=getView().findViewById(R.id.imgback2);
+        imgb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {gotologinfragment();}
+        });
         btnsignup=getView().findViewById(R.id.btnsignupsignup);
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,5 +117,10 @@ public class signupFragment extends Fragment {
         });
 
     }
-
+    private void gotologinfragment()
+    {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, new loginFragment());
+        ft.commit();
+    }
 }

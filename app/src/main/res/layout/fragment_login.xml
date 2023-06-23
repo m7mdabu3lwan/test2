@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/firstback"
     tools:context=".Fragments.loginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +18,7 @@
             android:layout_marginTop="138dp"
             android:ems="10"
             android:hint="username:"
+            android:textStyle="bold"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +32,7 @@
             android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="password:"
+            android:textStyle="bold"
             android:inputType="numberPassword"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="@+id/etusernamelogin"
@@ -41,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
             android:text="Login"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etpasswordlogin" />
@@ -52,6 +56,18 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="signup"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/btnloginlogin"
+            app:layout_constraintTop_toBottomOf="@+id/btnloginlogin" />
+
+        <TextView
+            android:id="@+id/tvforgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="56dp"
+            android:text="Forgerpassword"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/btnloginlogin"
             app:layout_constraintTop_toBottomOf="@+id/btnloginlogin" />
     </androidx.constraintlayout.widget.ConstraintLayout>

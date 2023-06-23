@@ -5,6 +5,7 @@
     android:id="@+id/Zain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/arnold"
     tools:context=".Fragments.NutritionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +17,8 @@
             android:layout_width="213dp"
             android:layout_height="0dp"
             android:layout_marginBottom="95dp"
-            android:text="TextView"
+            android:text="calories:"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvprotein"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +29,8 @@
             android:layout_width="213dp"
             android:layout_height="0dp"
             android:layout_marginBottom="247dp"
-            android:text="TextView"
+            android:text="carb:"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +41,8 @@
             android:layout_width="213dp"
             android:layout_height="0dp"
             android:layout_marginBottom="90dp"
-            android:text="TextView"
+            android:text="protein:"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvcarbohydrate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +57,7 @@
             android:entries="@array/spinnerItems"
             app:layout_constraintBottom_toTopOf="@+id/imgv"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

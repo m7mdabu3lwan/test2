@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/arnold"
     tools:context=".Fragments.UserAddFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="weight:"
+            android:textStyle="bold"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/etlastname"
             app:layout_constraintTop_toBottomOf="@+id/etlastname" />
@@ -27,6 +29,7 @@
             android:layout_marginTop="98dp"
             android:ems="10"
             android:hint="First name:"
+            android:textStyle="bold"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +41,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Last name:"
+            android:textStyle="bold"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="@+id/etfirstname"
             app:layout_constraintTop_toBottomOf="@+id/etfirstname" />
@@ -47,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="enter"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

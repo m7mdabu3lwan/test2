@@ -24,7 +24,7 @@ import com.google.firebase.auth.AuthResult;
 
 public class loginFragment extends Fragment {
     private EditText etusername , etpassword;
-    private TextView tvsignuplink;
+    private TextView tvsignuplink , tvforgotpass;
     private Button btnlogin;
     private FirebaseServices fbs;
 
@@ -81,6 +81,11 @@ public class loginFragment extends Fragment {
         etusername = getView().findViewById(R.id.etusernamelogin);
         etpassword = getView().findViewById(R.id.etpasswordlogin);
         btnlogin = getView().findViewById(R.id.btnloginlogin);
+        tvforgotpass=getView().findViewById(R.id.tvforgot);
+        tvforgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {gotoforgotpassword();}
+        });
         tvsignuplink = getView().findViewById(R.id.tvsignuplinklogin);
         tvsignuplink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +126,11 @@ public class loginFragment extends Fragment {
     private void gotosignupfragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new signupFragment());
+        ft.commit();
+    }
+    private void gotoforgotpassword() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, new forgotpasswordFragment());
         ft.commit();
     }
 }

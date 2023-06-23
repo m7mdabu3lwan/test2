@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.test2.Data.FirebaseServices;
@@ -26,6 +28,7 @@ public class forgotpasswordFragment extends Fragment {
     private FirebaseServices fbs;
     private EditText etemail;
     private Button btnreset;
+    private ImageView imgback;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +82,11 @@ public class forgotpasswordFragment extends Fragment {
         fbs = FirebaseServices.getInstance();
         etemail = getView().findViewById(R.id.etemailforgotpassword);
         btnreset = getView().findViewById(R.id.btnresetforgotpassword);
+        imgback=getView().findViewById(R.id.imgback);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {gotologinfragment();}
+        });
         btnreset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,5 +106,12 @@ public class forgotpasswordFragment extends Fragment {
     }
 
     ;});
+    }
+
+    private void gotologinfragment()
+    {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, new loginFragment());
+        ft.commit();
     }
 }
